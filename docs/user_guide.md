@@ -1,12 +1,12 @@
-Checkers manual
+# Checkers manual
 
-version 0.2
+Version 0.2
 
 *Written by Genevieve Buckley and Sylvain Trépout*
 
-**[About Checkers]{.underline}**
+## About Checkers
 
-*Short introduction*
+### Short introduction
 
 Checkers is a software that performs denoising of cryo-scanning
 transmission electron tomography (cryo-STET) datasets. Denoising is
@@ -38,24 +38,26 @@ commands executed in Checkers are specific to Massive, however, if you
 are not part of Massive you are still able to run Checkers. No
 development of Windows or Mac version of Checkers is planned.
 
-![](Figure1.png){width="3.2in"
-height="3.7784722222222222in"}**Figure 1. Evolution of the image content
-during the splitting and inpainting steps of Checkers. First row)** A
-large field of view and a two-stage zoomed area focusing on gold beads
+![Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers](Figure1.png){width="3.2in"
+height="3.7784722222222222in"}
+**Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers.**
+**First row:** A large field of view and a two-stage zoomed area focusing on gold beads
 are included to better appreciate the image content after each computing
 step. The input is a conventional image extracted from an aligned
-cryo-STET tilt-series. **Second and third rows)** After splitting the
+cryo-STET tilt-series.
+**Second and third rows:** After splitting the
 pixels, two images are created, a first one composed of even coordinate
 pixels only and a second one only containing the odd coordinate pixels.
 In the large field of view, the odd and even images appear dark because
 of the presence of black pixels (i.e., the ones that were not copied).
 The moiré pattern is an optical illusion as can be observed in the zoom
 images, the intensity of the remaining pixels is the same (actually
-strictly the same) as that of the original ones. **Fourth and fifth
-rows)** The inpainting step reconstructs the missing pixels, generating
+strictly the same) as that of the original ones.
+**Fourth and fifth rows:** The inpainting step reconstructs the missing pixels, generating
 two images that on the large field of view cannot be distinguished from
 the original image, but at the highest zoom, differences can be
-observed. **Extra information)** Note that at the splitting step, only
+observed.
+**Extra information:** Note that at the splitting step, only
 half of the pixels are used as only pixels with coordinates (x-y) 1-1,
 2-2, 1-3, 2-4, 1-5, 2-6, and so on, are kept. The reason for keeping
 only half of the pixels is that this strategy produced higher-quality
@@ -66,9 +68,9 @@ scanning of the electron beam (two adjacent pixels are collected
 sequentially). Pixels diagonally adjacent are not collected sequentially
 and they generate better denoised volumes.
 
-**[Using Checkers]{.underline}**
+##Using Checkers
 
-*Prerequisites*
+### Prerequisites
 
 To run Checkers, several software must be pre-installed. We do not give
 any guidelines on how to install them as this is very platform-specific.
@@ -85,36 +87,34 @@ using this combination of software:
     manual installation described in here:
     <https://github.com/juglab/cryoCARE_T2T>)
 
-> To run the MATLAB commands, you need to have some of the scripts we
-> use, and these files must be present inside the *computing directory*
-> (or in your MATLAB path):
+To run the MATLAB commands, you need to have some of the scripts we
+use, and these files must be present inside the *computing directory*
+(or in your MATLAB path):
 
 - The collection of scripts to read/write MRC files, in particular
-    *ReadMRC.m* and *WriteMRC.m,* available here:\
-    <https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o>
+  `ReadMRC.m` and `WriteMRC.m`, available here:
+  [https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o](https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o)
+- The *inpaintn.m* script to inpaint sparse images, available here:
+  [https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays](https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays)
+- The file `splitPixels.m` is available in the `Scripts` folder of the
+  GitHub Checkers page.
 
-- The *inpaintn.m* script to inpaint sparse images, available here:\
-    <https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays>
+The main file, *Checkers.sh*, can be placed anywhere in your computer.
+The idea behind that is that if you work on different projects
+requiring different parameters, then you can have a *Checkers.sh* file
+per project, allowing you to keep track of what you did.
 
-- The file *splitPixels.m* is available in the *Scripts* folder of the
-    GitHub Checkers page.
+### Bash script: setting the variables
 
-> The main file, *Checkers.sh*, can be placed anywhere in your computer.
-> The idea behind that is that if you work on different projects
-> requiring different parameters, then you can have a *Checkers.sh* file
-> per project, allowing you to keep track of what you did.
->
-> *Bash script: setting the variables*
->
-> At the top of the Checkers bash script, you will find several "*module
-> load*" commands. These commands are Massive-specific and are useful
-> only to people having access to the Massive data processing engine
-> (<https://massive.org.au>). If you are using a desktop computer, you
-> can simply delete these lines or comment them using a \# in front of
-> the line.
->
-> Before running Checkers, you must set up a few variables that
-> correspond to:
+At the top of the Checkers bash script, you will find several `module load`
+commands. These commands are Massive-specific and are useful
+only to people having access to the Massive data processing engine
+[https://massive.org.au](https://massive.org.au).
+If you are using a desktop computer, you
+can simply delete these lines or comment them using a \# in front of
+the line.
+
+Before running Checkers, you must set up a few variables that correspond to:
 
 - Computing directory path
 - Data directory path
@@ -141,10 +141,10 @@ it.
 The *thickness* variable represents how thick the reconstruction will be
 in pixels. You should know more or less the value here.
 
-> *Bash script: actual computation*
+### Bash script: actual computation
 
 Checkers can process several tilt-series sequentially. This is performed
-using a *for* loop that goes through the different tilt-series, checking
+using a `for` loop that goes through the different tilt-series, checking
 if the data actually exists, skipping non-existent data which is useful
 when there are gaps in the tilt-series list. Our dataset always contains
 a few tens of tilt-series, so by default we number the tilt-series using
@@ -174,37 +174,38 @@ the denoised 3D reconstruction, then, you can relatively easily compute
 a 3D reconstruction for each tilt-series and identify the 6 coordinates
 (xStart, xStop, yStart, yStop, zStart, zStop) that define your area of
 interest. Checkers will automatically compute the values that must be
-given to the *newstack* command.
+given to the `newstack` command.
 
-The *TS* and *TF* variables represent the names of the aligned
+The `TS` and `TF` variables represent the names of the aligned
 tilt-series and tilt-angles, respectively. In Checkers, there is no
 assumption on what the extension of your files should be, this is why
 you need to provide the full filenames (except for the loop number). The
 tilt-series must be already aligned, and it can have any file extension
-(.*ali*, .*st*, .*mrc*, .*thisishowiliketonamemyfiles*, etc.) as long as
+(`.ali`, `.st`, `.mrc`, `.thisishowiliketonamemyfiles`, etc.) as long as
 it is a file in the MRC format. The same goes for the tilt-angle file,
 it just needs to be a single-column text file containing as many rows as
 images contained in the tilt-series file, this convention is used by
 many reconstruction algorithms (e.g. IMOD, Tomo3D). The convention we
-use in the *Checkers.sh* file on GitHub is *.ali* and *.rawtlt* for the
+use in the `Checkers.sh` file on GitHub is `.ali` and `.rawtlt` for the
 aligned tilt-series and the tilt file, respectively; however, you can
 change it to match your naming convention.
 
-Checkers automatically copies the *data* from the *data* *directory* to
-the *computing directory*. At the end of the script, it will also move
-the final results to your *data directory*. A sub-folder *TS_001* is
+Checkers automatically copies the *data* from the *data directory* to
+the `computing directory`. At the end of the script, it will also move
+the final results to your *data directory*. A sub-folder `TS_001` is
 also created and all intermediate steps will be written inside it, and
 eventually deleted.
 
-> For better referencing the different computing steps performed in
-> Checkers, we have numbered them from **01** to **10** in the
-> *Checkers.sh* bash script. You might have to change some of the
-> commands if you want to do things slightly differently than us, and we
-> will let you know where to make those changes using the command
-> numbers. Note that these numbers do not correspond to the step numbers
-> described in the original publication of Checkers.
+For better referencing the different computing steps performed in
+Checkers, we have numbered them from **01** to **10** in the
+`Checkers.sh` bash script. You might have to change some of the
+commands if you want to do things slightly differently than us, and we
+will let you know where to make those changes using the command
+numbers. Note that these numbers do not correspond to the step numbers
+described in the original publication of Checkers.
 
-Command **01**: This command starts the *splitPixels.m* MATLAB script
+#### Command 01
+**Command 01**: This command starts the *splitPixels.m* MATLAB script
 (no GUI displayed) which takes the input data and splits it into two
 halved datasets. To be able to run this script, the MATLAB file
 *splitPixels.m* must be in your *computing directory*, otherwise, MATLAB
@@ -221,20 +222,23 @@ information if the command fails. The command **01** outputs two
 tilt-series named *TS_001a_DTC.mrc* and *TS_001b_DTC.mrc*, which will be
 used in the following part of the Checkers script.
 
-Commands **02a** and **02b**: The volumes corresponding to the two
+#### Commands 02a and 02b
+**Commands 02a and 02b**: The volumes corresponding to the two
 inpainted tilt-series are reconstructed with Tomo3D. The output is a
 volume with the XZ plane facing us. At this step, if you want to use
 IMOD instead, just change the commands accordingly. You will need to
 replace the commands **02a** and **02b** with something like "*tilt
 -input -output -TILTFILE -THICKNESS etc.*"
 
-Commands **03a** and **03b**: Since the output of the previous command
+#### Commands 03a and 03b
+**Commands 03a and 03b**: Since the output of the previous command
 is a rotated volume, we need to rotate it in the right orientation so we
 can explore the data more easily. *Trimvol* is an IMOD, and the *-rx*
 option rotates the volume around the X axis, so we have a volume with
 the XY plane facing us.
 
-Commands **04a** and **04b**: The *newstack* command from IMOD is used
+#### Commands 04a and 04b
+**Commands 04a** and 04b**: The *newstack* command from IMOD is used
 to crop the volumes according to the ROI coordinates defined above in
 the script. The *-secs* option lets you choose what slices of the volume
 you want to keep. With the *-size* option, you set X and Y sizes of the
@@ -245,14 +249,17 @@ taken care of by Checkers. If you do not want to crop your
 reconstruction, just comment the *newstack* commands **04a** and **04b**
 with a #, it will still work.
 
-Command **05**: Delete temporary files.
+#### Command 05
+**Command 05**: Delete temporary files.
 
-Command **06**: This command is to load the cryocare conda environment.
+#### Command 06
+**Command 06**: This command is to load the cryocare conda environment.
 The first line (*source /my/path/to/...*) consists of loading miniconda.
 The second line (*module load cryocare)* is loading the cryoCARE
 environment. You will need to input the right path.
 
-Command **07**: This is the 1^st^ cryoCARE command which generates the
+#### Command 07
+**Command 07**: This is the 1^st^ cryoCARE command which generates the
 data for further training of the model. Here we use the following
 parameters (as in train_data_config.json from cryoCARE_pip):
 
@@ -260,11 +267,12 @@ parameters (as in train_data_config.json from cryoCARE_pip):
 - Number of validation volumes = 120
 - Volume dimensions = 72,72,72
 
-> These parameters were not particularly optimised. Feel free to change
-> them if they do not suit you or if you think you can achieve better
-> denoising.
+These parameters were not particularly optimised. Feel free to change
+them if they do not suit you or if you think you can achieve better
+denoising.
 
-Command **08**: This is the 2^nd^ cryoCARE command which trains the
+#### Command 08
+**Command 08**: This is the 2^nd^ cryoCARE command which trains the
 neural network model. We use the following parameters (as in
 train_config.json from cryoCARE_pip):
 
@@ -279,14 +287,16 @@ Again, these parameters were not particularly optimised. Feel free to
 change them if they do not suit you or if you think you can achieve
 better denoising.
 
-Command **09**: This is the 3^rd^ and last cryoCARE command which
+#### Command 09
+**Command 09**: This is the 3^rd^ and last cryoCARE command which
 applies the trained model to the data.
 
-Command **10**: The final data, including the denoised tomogram, the
-cryoCARE config.json file, the computed model weights and the Matlab log
+#### Command 10
+**Command 10**: The final data, including the denoised tomogram, the
+cryoCARE `config.json` file, the computed model weights and the Matlab log
 are moved to the *data directory*.
 
-**[References]{.underline}**
+## References
 
 1. Lehtinen, J. *et al.* Noise2Noise: Learning Image Restoration
 without Clean Data. in *Proceedings of the 35th International Conference
