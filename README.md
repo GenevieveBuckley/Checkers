@@ -8,7 +8,11 @@ See the full [installation guide here](install.md).
 
 ## How to use
 
-The user documentation is available at https://cryostem-tools.github.io/Checkers/, including a [user guide](user_guide.md).
+The user documentation is available at [https://cryostem-tools.github.io/Checkers/](https://cryostem-tools.github.io/Checkers/), including a [user guide](user_guide.md).
+
+## Test dataset
+
+**Test dataset**: *"Cryo-scanning transmission electron tomography of T. brucei"* BioStudies accession number S-BSST1345, [https://www.ebi.ac.uk/biostudies/studies/S-BSST1345](https://www.ebi.ac.uk/biostudies/studies/S-BSST1345).
 
 ## Citation
 
