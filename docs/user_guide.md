@@ -2,7 +2,19 @@
 
 Version 0.2
 
-*Written by Genevieve Buckley and Sylvain Trépout*
+Written by Genevieve Buckley and Sylvain Trépout.
+
+## Table of Contents
+
+* [About Checkers](#about-checkers)
+  * [Short introduction](#short-introduction)
+  * [Figure 1](#figure-1)
+* [Using Checkers](#about-checkers)
+  * [Prerequisites](#prerequisites)
+  * [Bash script: setting the variables](#bash-script-setting-the-variables)
+  * [Bash script: actual computation](#bash-script-actual-computation)
+    * [Commands](#commands)
+* [References](#references)
 
 ## About Checkers
 
@@ -38,6 +50,8 @@ commands executed in Checkers are specific to Massive, however, if you
 are not part of Massive you are still able to run Checkers. No
 development of Windows or Mac version of Checkers is planned.
 
+### Figure 1
+
 ![Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers](Figure1.png){width="3.2in"
 height="3.7784722222222222in"}
 **Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers.**
@@ -68,7 +82,7 @@ scanning of the electron beam (two adjacent pixels are collected
 sequentially). Pixels diagonally adjacent are not collected sequentially
 and they generate better denoised volumes.
 
-##Using Checkers
+## Using Checkers
 
 ### Prerequisites
 
@@ -78,25 +92,25 @@ These software are well-known and broadly used, you will find all the
 necessary information online. On our cluster, Checkers runs smoothly
 using this combination of software:
 
-- Anaconda (Python 3.8 and gcc8)
-- Cuda 10.1
-- Cudnn 7.6.5 for Cuda 10.1
-- Imod 4.11.15
-- Matlab 2019
-- A cryoCARE environment installed in miniconda (we followed the
-    manual installation described in here:
-    <https://github.com/juglab/cryoCARE_T2T>)
+* Anaconda (Python 3.8 and gcc8)
+* Cuda 10.1
+* Cudnn 7.6.5 for Cuda 10.1
+* Imod 4.11.15
+* Matlab 2019
+* A cryoCARE environment installed in miniconda (we followed the
+  manual installation described in here:
+  [https://github.com/juglab/cryoCARE_T2T](https://github.com/juglab/cryoCARE_T2T)
 
 To run the MATLAB commands, you need to have some of the scripts we
 use, and these files must be present inside the *computing directory*
 (or in your MATLAB path):
 
-- The collection of scripts to read/write MRC files, in particular
+* The collection of scripts to read/write MRC files, in particular
   `ReadMRC.m` and `WriteMRC.m`, available here:
   [https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o](https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o)
-- The *inpaintn.m* script to inpaint sparse images, available here:
+* The *inpaintn.m* script to inpaint sparse images, available here:
   [https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays](https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays)
-- The file `splitPixels.m` is available in the `Scripts` folder of the
+* The file `splitPixels.m` is available in the `Scripts` folder of the
   GitHub Checkers page.
 
 The main file, *Checkers.sh*, can be placed anywhere in your computer.
@@ -116,11 +130,11 @@ the line.
 
 Before running Checkers, you must set up a few variables that correspond to:
 
-- Computing directory path
-- Data directory path
-- Tomo3D path
-- Thickness of the reconstruction
-- X/Y dimension of the tilt-series (only one value, we assume square images)
+* Computing directory path
+* Data directory path
+* Tomo3D path
+* Thickness of the reconstruction
+* X/Y dimension of the tilt-series (only one value, we assume square images)
 
 We chose to have a *computing directory* AND a *data directory*
 because in our workflow the directory where the *data* is stored has
@@ -204,8 +218,22 @@ will let you know where to make those changes using the command
 numbers. Note that these numbers do not correspond to the step numbers
 described in the original publication of Checkers.
 
+### Commands
+
+* [Command 01](#command-01)
+* [Commands 02a and 02b](#commands-02a-and-02b)
+* [Commands 03a and 03b](#commands-03a-and-03b)
+* [Commands 04a and 04b](#commands-04a-and-04b)
+* [Command 05](#command-05)
+* [Command 06](#command-06)
+* [Command 07](#command-07)
+* [Command 08](#command-08)
+* [Command 09](#command-09)
+* [Command 10](#command-10)
+
 #### Command 01
-**Command 01**: This command starts the *splitPixels.m* MATLAB script
+
+This command starts the *splitPixels.m* MATLAB script
 (no GUI displayed) which takes the input data and splits it into two
 halved datasets. To be able to run this script, the MATLAB file
 *splitPixels.m* must be in your *computing directory*, otherwise, MATLAB
@@ -223,7 +251,8 @@ tilt-series named *TS_001a_DTC.mrc* and *TS_001b_DTC.mrc*, which will be
 used in the following part of the Checkers script.
 
 #### Commands 02a and 02b
-**Commands 02a and 02b**: The volumes corresponding to the two
+
+The volumes corresponding to the two
 inpainted tilt-series are reconstructed with Tomo3D. The output is a
 volume with the XZ plane facing us. At this step, if you want to use
 IMOD instead, just change the commands accordingly. You will need to
@@ -231,14 +260,16 @@ replace the commands **02a** and **02b** with something like "*tilt
 -input -output -TILTFILE -THICKNESS etc.*"
 
 #### Commands 03a and 03b
-**Commands 03a and 03b**: Since the output of the previous command
+
+Since the output of the previous command
 is a rotated volume, we need to rotate it in the right orientation so we
-can explore the data more easily. *Trimvol* is an IMOD, and the *-rx*
+can explore the data more easily. *Trimvol* is an IMOD command, and the *-rx*
 option rotates the volume around the X axis, so we have a volume with
 the XY plane facing us.
 
 #### Commands 04a and 04b
-**Commands 04a** and 04b**: The *newstack* command from IMOD is used
+
+The *newstack* command from IMOD is used
 to crop the volumes according to the ROI coordinates defined above in
 the script. The *-secs* option lets you choose what slices of the volume
 you want to keep. With the *-size* option, you set X and Y sizes of the
@@ -250,49 +281,55 @@ reconstruction, just comment the *newstack* commands **04a** and **04b**
 with a #, it will still work.
 
 #### Command 05
-**Command 05**: Delete temporary files.
+
+Delete temporary files.
 
 #### Command 06
-**Command 06**: This command is to load the cryocare conda environment.
+
+This command is to load the cryocare conda environment.
 The first line (*source /my/path/to/...*) consists of loading miniconda.
 The second line (*module load cryocare)* is loading the cryoCARE
 environment. You will need to input the right path.
 
 #### Command 07
-**Command 07**: This is the 1^st^ cryoCARE command which generates the
+
+This is the 1^st^ cryoCARE command which generates the
 data for further training of the model. Here we use the following
 parameters (as in train_data_config.json from cryoCARE_pip):
 
-- Number of train volumes = 1200
-- Number of validation volumes = 120
-- Volume dimensions = 72,72,72
+* Number of train volumes = 1200
+* Number of validation volumes = 120
+* Volume dimensions = 72,72,72
 
 These parameters were not particularly optimised. Feel free to change
 them if they do not suit you or if you think you can achieve better
 denoising.
 
 #### Command 08
-**Command 08**: This is the 2^nd^ cryoCARE command which trains the
+
+This is the 2^nd^ cryoCARE command which trains the
 neural network model. We use the following parameters (as in
 train_config.json from cryoCARE_pip):
 
-- Train loss = mse
-- Number of training epochs = 100
-- Number of training steps per epoch = 200
-- U-net depth = 3
-- U-net first layer size = 16
-- Learning rate = 4. 10^-4^
+* Train loss = mse
+* Number of training epochs = 100
+* Number of training steps per epoch = 200
+* U-net depth = 3
+* U-net first layer size = 16
+* Learning rate = 4. 10^-4^
 
 Again, these parameters were not particularly optimised. Feel free to
 change them if they do not suit you or if you think you can achieve
 better denoising.
 
 #### Command 09
-**Command 09**: This is the 3^rd^ and last cryoCARE command which
+
+This is the 3^rd^ and last cryoCARE command which
 applies the trained model to the data.
 
 #### Command 10
-**Command 10**: The final data, including the denoised tomogram, the
+
+The final data, including the denoised tomogram, the
 cryoCARE `config.json` file, the computed model weights and the Matlab log
 are moved to the *data directory*.
 
