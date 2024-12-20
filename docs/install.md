@@ -17,7 +17,7 @@ installation instructions, as well as how to test if your installation was succe
 ## Installing Checkers
 
 Assuming all the pre-requisites are correct, you can then run Checkers using the
-main bash script (provided at [Scripts/Checkers.sh](Scripts/Checkers.sh)).
+main bash script (provided at [https://github.com/CryoSTEM-tools/Checkers/blob/main/Scripts/Checkers.sh](https://github.com/CryoSTEM-tools/Checkers/blob/main/Scripts/Checkers.sh)).
 
 Our detailed user guide describes how to run each step of the process.
 
