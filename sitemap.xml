@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://cryostem-tools.github.io/Checkers/</loc>
-         <lastmod>2024-12-19</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-12-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryostem-tools.github.io/Checkers/_user_guide/</loc>
+         <lastmod>2024-12-20</lastmod>
     </url>
     <url>
          <loc>https://cryostem-tools.github.io/Checkers/developers/</loc>
-         <lastmod>2024-12-19</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-12-20</lastmod>
     </url>
     <url>
          <loc>https://cryostem-tools.github.io/Checkers/install/</loc>
-         <lastmod>2024-12-19</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-12-20</lastmod>
+    </url>
+    <url>
+         <loc>https://cryostem-tools.github.io/Checkers/user-manual/</loc>
+         <lastmod>2024-12-20</lastmod>
     </url>
     <url>
          <loc>https://cryostem-tools.github.io/Checkers/user_guide/</loc>
-         <lastmod>2024-12-19</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-12-20</lastmod>
     </url>
 </urlset>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://cryostem-tools.github.io/Checkers/user-manual/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Checkers user manual - Checkers</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Checkers</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../install/" class="nav-link">Install</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../user_guide/" class="nav-link">User Guide</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../developers/" class="nav-link">Developers</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#checkers-user-manual" class="nav-link">Checkers user manual</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#about-checkers" class="nav-link">About Checkers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#figure-1" class="nav-link">Figure 1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-checkers" class="nav-link">Using Checkers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#references" class="nav-link">References</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="checkers-user-manual">Checkers user manual</h1>
+<p>Version 0.2</p>
+<p>Written by Genevieve Buckley and Sylvain Trépout</p>
+<h2 id="about-checkers">About Checkers</h2>
+<h3 id="short-introduction">Short introduction</h3>
+<p>Checkers is a software that performs denoising of cryo-scanning transmission electron tomography (cryo-STET) datasets. Denoising is performed using the noise2noise strategy<a href="">1</a> implemented in cryo-CARE<a href="">2</a>. This strategy uses a pair of images/volumes representing the same object of interest, provided the noise in both images/volumes is different. In conventional cryo-electron tomography, the image/volume pair is generated using the odd and even frames of the movies collected using a direct electron detector. Cryo-STET datasets do not contain odd and even frames, they only consist of a single collected frame, thus the image/volume pair must be generated post-acquisition. To generate such a pair of images/volumes in cryo-STET, we have developed a new strategy combining the software IMOD <a href="">3</a>,<a href="">4</a>, Tomo3D<a href="">5–7</a> and MATLAB. In MATLAB, the image pixels are split in two, i.e. the pixels with even coordinates are separated from the pixels with odd coordinates. This generates two different images where only some pixels contain information. To rebuild the information in the blank pixels, we use a robust inpainting algorithm<a href="">8,9</a> as used in previous studies10,11. The pixel splitting and inpainting computing steps are described in Figure 1.</p>
+<p>Checkers currently runs in a bash script that executes all the steps, calling the different software one after the other. We want to provide the same workflow in a single Python or Jupyter Notebook script but we do not know yet when this will be available.</p>
+<p>Checkers was developed under Linux (CentOS Linux, Release 7 Kernel 3.10.0) on the Massive cluster <a href="https://massive.org.au">https://massive.org.au</a>. Some of the commands executed in Checkers are specific to Massive, however, if you are not part of Massive you are still able to run Checkers. No development of Windows or Mac version of Checkers is planned.</p>
+<h2 id="figure-1">Figure 1</h2>
+<p><img alt="Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers." src="../Figure1.png" /></p>
+<p>Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers. First row) A large field of view and a two-stage zoomed area focusing on gold beads are included to better appreciate the image content after each computing step. The input is a conventional image extracted from an aligned cryo-STET tilt-series. Second and third rows) After splitting the pixels, two images are created, a first one composed of even coordinate pixels only and a second one only containing the odd coordinate pixels. In the large field of view, the odd and even images appear dark because of the presence of black pixels (i.e., the ones that were not copied). The moiré pattern is an optical illusion as can be observed in the zoom images, the intensity of the remaining pixels is the same (actually strictly the same) as that of the original ones. Fourth and fifth rows) The inpainting step reconstructs the missing pixels, generating two images that on the large field of view cannot be distinguished from the original image, but at the highest zoom, differences can be observed. Extra information) Note that at the splitting step, only half of the pixels are used as only pixels with coordinates (x-y) 1-1, 2-2, 1-3, 2-4, 1-5, 2-6, and so on, are kept. The reason for keeping only half of the pixels is that this strategy produced higher-quality denoised reconstructions. This has not been investigated further, but it could be that adjacent pixels do not satisfy the noise independence requirements because they share a certain amount of noise due to the scanning of the electron beam (two adjacent pixels are collected sequentially). Pixels diagonally adjacent are not collected sequentially and they generate better denoised volumes.</p>
+<h2 id="using-checkers">Using Checkers</h2>
+<h3 id="pre-requisites">Pre-requisites</h3>
+<p>To run Checkers, several software must be pre-installed. We do not give any guidelines on how to install them as this is very platform-specific. These software are well-known and broadly used, you will find all the necessary information online. On our cluster, Checkers runs smoothly using this combination of software:
+- Anaconda (Python 3.8 and gcc8)
+- Cuda 10.1
+- Cudnn 7.6.5 for Cuda 10.1
+- Imod 4.11.15
+- Matlab 2019
+- A cryoCARE environment installed in miniconda (we followed the manual installation described in here: https://github.com/juglab/cryoCARE_T2T)</p>
+<p>To run the MATLAB commands, you need to have some of the scripts we use, and these files must be present inside the computing directory (or in your MATLAB path):
+- The collection of scripts to read/write MRC files, in particular ReadMRC.m and WriteMRC.m, available here:
+https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o
+- The inpaintn.m script to inpaint sparse images, available here:
+https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays
+- The file splitPixels.m is available in the Scripts folder of the GitHub Checkers page. </p>
+<p>The main file, Checkers.sh, can be placed anywhere in your computer. The idea behind that is that if you work on different projects requiring different parameters, then you can have a Checkers.sh file per project, allowing you to keep track of what you did.</p>
+<h3 id="bash-script-setting-the-variables">Bash script: setting the variables</h3>
+<p>At the top of the Checkers bash script, you will find several “module load” commands. These commands are Massive-specific and are useful only to people having access to the Massive data processing engine <a href="https://massive.org.au">https://massive.org.au</a>. If you are using a desktop computer, you can simply delete these lines or comment them using a # in front of the line.</p>
+<p>Before running Checkers, you must set up a few variables that correspond to:
+- Computing directory path
+- Data directory path
+- Tomo3D path
+- Thickness of the reconstruction
+- X/Y dimension of the tilt-series (only one value, we assume square images)</p>
+<p>We chose to have a computing directory AND a data directory because in our workflow the directory where the data is stored has either limited capacity, a slower connection, or both. By copying the data to the computing directory, we avoid writing the intermediate computed steps to the data directory and we run the computation on a disk with faster disk access.</p>
+<p>If your configuration or liking is to run the computation in the same folder as where your data is located, then just enter the same path for the computing and data directories.</p>
+<p>The tomo3dpath is simply the path of Tomo3D bin folder on your computer. We use Tomo3D for computing the 3D reconstructions. However, if you prefer using IMOD for reconstructing your tomograms, please do it.</p>
+<p>The thickness variable represents how thick the reconstruction will be in pixels. You should know more or less the value here.</p>
+<h3 id="bash-script-actual-computation">Bash script: actual computation</h3>
+<p>Checkers can process several tilt-series sequentially. This is performed using a for loop that goes through the different tilt-series, checking if the data actually exists, skipping non-existent data which is useful when there are gaps in the tilt-series list. Our dataset always contains a few tens of tilt-series, so by default we number the tilt-series using 3 digits. However, if you have more than a thousand tilt-series, it is possible to use 4 digits, as indicated in the script.</p>
+<p>At the beginning of the script, the user is asked to define the coordinates of the region of interest for each tilt-series. There are at least a couple of reasons why you should do that. First, in terms of computing time, you do not want to perform the whole cryoCARE denoising on the entire volume, especially if the sample does not fill it (which is rarely the case). Using large volumes might cause out-of-memory issues in cryoCARE and you might have to pick a greater number of volume coordinates to more accurately train your model, which will significantly increase the computation time. The second reason is that in cryo-STET there are often large differences between the min and max pixel values, because thick samples (e.g. entire bacteria) are observed on a thin background (carbon support film). At the background level, the intense beam experiences almost no scattering, hence all electrons are collected on the STEM BF detector, generating a high-intensity pixel. At the sample level, the scattering is important (especially at high tilt angles), generating a low-intensity pixel. During the testing of Checkers, we noticed that denoising works better on smaller 3D reconstructions where the values of high-intensity and low-intensity pixels are contained. Checkers uses an aligned tilt-series to generate the denoised 3D reconstruction, then, you can relatively easily compute a 3D reconstruction for each tilt-series and identify the 6 coordinates (xStart, xStop, yStart, yStop, zStart, zStop) that define your area of interest. Checkers will automatically compute the values that must be given to the newstack command.</p>
+<p>The TS and TF variables represent the names of the aligned tilt-series and tilt-angles, respectively. In Checkers, there is no assumption on what the extension of your files should be, this is why you need to provide the full filenames (except for the loop number). The tilt-series must be already aligned, and it can have any file extension (.ali, .st, .mrc, .thisishowiliketonamemyfiles, etc.) as long as it is a file in the MRC format. The same goes for the tilt-angle file, it just needs to be a single-column text file containing as many rows as images contained in the tilt-series file, this convention is used by many reconstruction algorithms (e.g. IMOD, Tomo3D). The convention we use in the Checkers.sh file on GitHub is .ali and .rawtlt for the aligned tilt-series and the tilt file, respectively; however, you can change it to match your naming convention.</p>
+<p>Checkers automatically copies the data from the data directory to the computing directory. At the end of the script, it will also move the final results to your data directory. A sub-folder TS_001 is also created and all intermediate steps will be written inside it, and eventually deleted.</p>
+<p>For better referencing the different computing steps performed in Checkers, we have numbered them from 01 to 10 in the Checkers.sh bash script. You might have to change some of the commands if you want to do things slightly differently than us, and we will let you know where to make those changes using the command numbers. Note that these numbers do not correspond to the step numbers described in the original publication of Checkers.</p>
+<h4 id="command-01">Command 01</h4>
+<p>Command 01: This command starts the splitPixels.m MATLAB script (no GUI displayed) which takes the input data and splits it into two halved datasets. To be able to run this script, the MATLAB file splitPixels.m must be in your computing directory, otherwise, MATLAB won’t find it. As previously mentioned, ReadMRC.m, WriteMRC.m, inpaintn.m, etc. must also be in your computing directory. You can also put them in your MATLAB path, and to load your path you must use the addpath(genpath(path)) command that is at the top of the splitPixels.m script. By default, the path loading is disabled, but a MATLAB experienced user might prefer having the path loaded instead of needing to have the MATLAB scripts in the computing directory. You have two options, choose the one you prefer. The command 01 also outputs a log file (matlab_output_splitPixels.txt) which will contain useful information if the command fails. The command 01 outputs two tilt-series named TS_001a_DTC.mrc and TS_001b_DTC.mrc, which will be used in the following part of the Checkers script.</p>
+<h4 id="commands-02a-and-02b">Commands 02a and 02b</h4>
+<p>Commands 02a and 02b: The volumes corresponding to the two inpainted tilt-series are reconstructed with Tomo3D. The output is a volume with the XZ plane facing us. At this step, if you want to use IMOD instead, just change the commands accordingly. You will need to replace the commands 02a and 02b with something like “tilt -input -output -TILTFILE -THICKNESS etc.”</p>
+<h4 id="commands-03a-and-03b">Commands 03a and 03b</h4>
+<p>Commands 03a and 03b: Since the output of the previous command is a rotated volume, we need to rotate it in the right orientation so we can explore the data more easily. Trimvol is an IMOD, and the -rx option rotates the volume around the X axis, so we have a volume with the XY plane facing us. </p>
+<h4 id="commands-04a-and-04b">Commands 04a and 04b</h4>
+<p>Commands 04a and 04b: The newstack command from IMOD is used to crop the volumes according to the ROI coordinates defined above in the script. The -secs option lets you choose what slices of the volume you want to keep. With the -size option, you set X and Y sizes of the output reconstruction. And with the -offset option, you set the centre of the output reconstruction (0,0 means that the input and output reconstructions will share the same centre). All of this is already taken care of by Checkers. If you do not want to crop your reconstruction, just comment the newstack commands 04a and 04b with a #, it will still work.</p>
+<h4 id="command-05">Command 05</h4>
+<p>Command 05: Delete temporary files.</p>
+<h4 id="command-06">Command 06</h4>
+<p>Command 06: This command is to load the cryocare conda environment. The first line (source /my/path/to/…) consists of loading miniconda. The second line (module load cryocare) is loading the cryoCARE environment. You will need to input the right path.</p>
+<h4 id="command-07">Command 07</h4>
+<p>Command 07: This is the 1st cryoCARE command which generates the data for further training of the model. Here we use the following parameters (as in train_data_config.json from cryoCARE_pip):
+- Number of train volumes = 1200
+- Number of validation volumes = 120
+- Volume dimensions = 72,72,72</p>
+<p>These parameters were not particularly optimised. Feel free to change them if they do not suit you or if you think you can achieve better denoising.</p>
+<h4 id="command-08">Command 08</h4>
+<p>Command 08: This is the 2nd cryoCARE command which trains the neural network model. We use the following parameters (as in train_config.json from cryoCARE_pip):</p>
+<ul>
+<li>Train loss = mse</li>
+<li>Number of training epochs = 100</li>
+<li>Number of training steps per epoch = 200</li>
+<li>U-net depth = 3</li>
+<li>U-net first layer size = 16</li>
+<li>Learning rate = 4. 10-4</li>
+</ul>
+<p>Again, these parameters were not particularly optimised. Feel free to change them if they do not suit you or if you think you can achieve better denoising.</p>
+<h4 id="command-09">Command 09</h4>
+<p>Command 09: This is the 3rd and last cryoCARE command which applies the trained model to the data. </p>
+<h4 id="command-10">Command 10</h4>
+<p>Command 10: The final data, including the denoised tomogram, the cryoCARE config.json file, the computed model weights and the Matlab log are moved to the data directory.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Lehtinen, J. <em>et al.</em> Noise2Noise: Learning Image Restoration without Clean Data. in <em>Proceedings of the 35th International Conference on Machine Learning</em> 2965–2974 (PMLR, 2018).</li>
+<li>Buchholz, T.-O., Jordan, M., Pigino, G. &amp; Jug, F. Cryo-CARE: Content-Aware Image Restoration for Cryo-Transmission Electron Microscopy Data. 5.</li>
+<li>Kremer, J. R., Mastronarde, D. N. &amp; McIntosh, J. R. Computer visualization of three-dimensional image data using IMOD. <em>J Struct Biol</em> <strong>116</strong>, 71–76 (1996).</li>
+<li>Mastronarde, D. N. &amp; Held, S. R. Automated tilt series alignment and tomographic reconstruction in IMOD. <em>J Struct Biol</em> <strong>197</strong>, 102–113 (2017).</li>
+<li>Agulleiro, J. I. &amp; Fernandez, J. J. Fast tomographic reconstruction on multicore computers. <em>Bioinformatics</em> <strong>27</strong>, 582–583 (2011).</li>
+<li>Agulleiro, J.-I. &amp; Fernandez, J.-J. Tomo3D 2.0 – Exploitation of Advanced Vector eXtensions (AVX) for 3D reconstruction. <em>Journal of Structural Biology</em> <strong>189</strong>, 147–152 (2015).</li>
+<li>Fernandez, J.-J., Li, S., Bharat, T. A. M. &amp; Agard, D. A. Cryo-tomography tilt-series alignment with consideration of the beam-induced sample motion. <em>Journal of Structural Biology</em> <strong>202</strong>, 200–209 (2018).</li>
+<li>Garcia, D. Robust smoothing of gridded data in one and higher dimensions with missing values. <em>Comput Stat Data Anal</em> <strong>54</strong>, 1167–1178 (2010).</li>
+<li>Wang, G., Garcia, D., Liu, Y., de Jeu, R. &amp; Johannes Dolman, A. A three-dimensional gap filling method for large geophysical datasets: Application to global satellite soil moisture observations. <em>Environmental Modelling &amp; Software</em> <strong>30</strong>, 139–142 (2012).</li>
+<li>Trépout, S. Tomographic Collection of Block-Based Sparse STEM Images: Practical Implementation and Impact on the Quality of the 3D Reconstructed Volume. <em>Materials</em> <strong>12</strong>, 2281 (2019).</li>
+<li>Cossa, A., Arluison, V. &amp; Trépout, S. Sparse cryo-STEM tomography for biological samples. <em>Microsc Microanal</em> <strong>27</strong>, 3028–3030 (2021).</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

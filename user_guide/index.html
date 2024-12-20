@@ -1,428 +1,540 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
         <link rel="canonical" href="https://cryostem-tools.github.io/Checkers/user_guide/">
-      
-      
-        <link rel="prev" href="../install/">
-      
-      
-        <link rel="next" href="../developers/">
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
-    
-    
-      
+        <link rel="shortcut icon" href="../img/favicon.ico">
         <title>User Guide - Checkers</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
-      
-      
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
 
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Checkers</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    
-    
-      
-    
-    
-      
-        
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
-      
-    
-    
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../install/" class="nav-link">Install</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">User Guide</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../developers/" class="nav-link">Developers</a>
+                            </li>
+                        </ul>
 
-    
-    
-    
-  </head>
-  
-  
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#user-guide" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Checkers" class="md-header__button md-logo" aria-label="Checkers" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            Checkers
-          </span>
-        </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              User Guide
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-    
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Checkers" class="md-nav__button md-logo" aria-label="Checkers" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
-
-    </a>
-    Checkers
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Home
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../install/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Install
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    User Guide
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    User Guide
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#test-dataset" class="md-nav__link">
-    <span class="md-ellipsis">
-      Test dataset
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      How to run
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#expected-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      Expected output
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../developers/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Developers
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-  </ul>
-</nav>
-                  </div>
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../install/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../developers/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
                 </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#test-dataset" class="md-nav__link">
-    <span class="md-ellipsis">
-      Test dataset
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      How to run
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#expected-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      Expected output
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              <article class="md-content__inner md-typeset">
-                
-                  
-
-
-<h1 id="user-guide">User Guide</h1>
-<p>First, ensure you have Checkers installed with all the necessary pre-requisites. See the full <a href="../install/">installation guide</a> for details.</p>
-<h2 id="test-dataset">Test dataset</h2>
-<p><strong>Test dataset</strong>: <em>"Cryo-scanning transmission electron tomography of T. brucei"</em> BioStudies accession number S-BSST1345, <a href="https://www.ebi.ac.uk/biostudies/studies/S-BSST1345">https://www.ebi.ac.uk/biostudies/studies/S-BSST1345</a>.</p>
-<h2 id="how-to-run">How to run</h2>
-<h2 id="expected-output">Expected output</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-                
-              </article>
             </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
-      
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
     </div>
-  </div>
-</footer>
-      
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#checkers-manual" class="nav-link">Checkers manual</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#table-of-contents" class="nav-link">Table of Contents</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#about-checkers" class="nav-link">About Checkers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#using-checkers" class="nav-link">Using Checkers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#references" class="nav-link">References</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
     </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
-    
-    
-      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
-      
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="checkers-manual">Checkers manual</h1>
+<p>Version 0.2</p>
+<p>Written by Genevieve Buckley and Sylvain Trépout.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#about-checkers">About Checkers</a></li>
+<li><a href="#short-introduction">Short introduction</a></li>
+<li><a href="#figure-1">Figure 1</a></li>
+<li><a href="#about-checkers">Using Checkers</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#bash-script-setting-the-variables">Bash script: setting the variables</a></li>
+<li><a href="#bash-script-actual-computation">Bash script: actual computation</a><ul>
+<li><a href="#commands">Commands</a></li>
+</ul>
+</li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="about-checkers">About Checkers</h2>
+<h3 id="short-introduction">Short introduction</h3>
+<p>Checkers is a software that performs denoising of cryo-scanning
+transmission electron tomography (cryo-STET) datasets. Denoising is
+performed using the noise2noise strategy^1^ implemented in cryo-CARE^2^.
+This strategy uses a pair of images/volumes representing the same object
+of interest, provided the noise in both images/volumes is different. In
+conventional cryo-electron tomography, the image/volume pair is
+generated using the odd and even frames of the movies collected using a
+direct electron detector. Cryo-STET datasets do not contain odd and even
+frames, they only consist of a single collected frame, thus the
+image/volume pair must be generated post-acquisition. To generate such a
+pair of images/volumes in cryo-STET, we have developed a new strategy
+combining the software IMOD^3,4^, Tomo3D^5--7^ and MATLAB. In MATLAB,
+the image pixels are split in two, i.e. the pixels with even coordinates
+are separated from the pixels with odd coordinates. This generates two
+different images where only some pixels contain information. To rebuild
+the information in the blank pixels, we use a robust inpainting
+algorithm^8,9^ as used in previous studies^10,11^. The pixel splitting
+and inpainting computing steps are described in Figure 1.</p>
+<p>Checkers currently runs in a bash script that executes all the steps,
+calling the different software one after the other. We want to provide
+the same workflow in a single Python or Jupyter Notebook script but we
+do not know yet when this will be available.</p>
+<p>Checkers was developed under Linux (CentOS Linux, Release 7 Kernel
+3.10.0) on the Massive cluster (<a href="https://massive.org.au">https://massive.org.au</a>). Some of the
+commands executed in Checkers are specific to Massive, however, if you
+are not part of Massive you are still able to run Checkers. No
+development of Windows or Mac version of Checkers is planned.</p>
+<h3 id="figure-1">Figure 1</h3>
+<p><img alt="Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers" src="../Figure1.png" />{width="3.2in"
+height="3.7784722222222222in"}
+<strong>Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers.</strong>
+<strong>First row:</strong> A large field of view and a two-stage zoomed area focusing on gold beads
+are included to better appreciate the image content after each computing
+step. The input is a conventional image extracted from an aligned
+cryo-STET tilt-series.
+<strong>Second and third rows:</strong> After splitting the
+pixels, two images are created, a first one composed of even coordinate
+pixels only and a second one only containing the odd coordinate pixels.
+In the large field of view, the odd and even images appear dark because
+of the presence of black pixels (i.e., the ones that were not copied).
+The moiré pattern is an optical illusion as can be observed in the zoom
+images, the intensity of the remaining pixels is the same (actually
+strictly the same) as that of the original ones.
+<strong>Fourth and fifth rows:</strong> The inpainting step reconstructs the missing pixels, generating
+two images that on the large field of view cannot be distinguished from
+the original image, but at the highest zoom, differences can be
+observed.
+<strong>Extra information:</strong> Note that at the splitting step, only
+half of the pixels are used as only pixels with coordinates (x-y) 1-1,
+2-2, 1-3, 2-4, 1-5, 2-6, and so on, are kept. The reason for keeping
+only half of the pixels is that this strategy produced higher-quality
+denoised reconstructions. This has not been investigated further, but it
+could be that adjacent pixels do not satisfy the noise independence
+requirements because they share a certain amount of noise due to the
+scanning of the electron beam (two adjacent pixels are collected
+sequentially). Pixels diagonally adjacent are not collected sequentially
+and they generate better denoised volumes.</p>
+<h2 id="using-checkers">Using Checkers</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>To run Checkers, several software must be pre-installed. We do not give
+any guidelines on how to install them as this is very platform-specific.
+These software are well-known and broadly used, you will find all the
+necessary information online. On our cluster, Checkers runs smoothly
+using this combination of software:</p>
+<ul>
+<li>Anaconda (Python 3.8 and gcc8)</li>
+<li>Cuda 10.1</li>
+<li>Cudnn 7.6.5 for Cuda 10.1</li>
+<li>Imod 4.11.15</li>
+<li>Matlab 2019</li>
+<li>A cryoCARE environment installed in miniconda (we followed the
+  manual installation described in here:
+  <a href="https://github.com/juglab/cryoCARE_T2T">https://github.com/juglab/cryoCARE_T2T</a></li>
+</ul>
+<p>To run the MATLAB commands, you need to have some of the scripts we
+use, and these files must be present inside the <em>computing directory</em>
+(or in your MATLAB path):</p>
+<ul>
+<li>The collection of scripts to read/write MRC files, in particular
+  <code>ReadMRC.m</code> and <code>WriteMRC.m</code>, available here:
+  <a href="https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o">https://au.mathworks.com/matlabcentral/fileexchange/27021-imagic-mrc-dm-and-star-file-i-o</a></li>
+<li>The <em>inpaintn.m</em> script to inpaint sparse images, available here:
+  <a href="https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays">https://au.mathworks.com/matlabcentral/fileexchange/27994-inpaint-over-missing-data-in-1-d-2-d-3-d-nd-arrays</a></li>
+<li>The file <code>splitPixels.m</code> is available in the <code>Scripts</code> folder of the
+  GitHub Checkers page.</li>
+</ul>
+<p>The main file, <em>Checkers.sh</em>, can be placed anywhere in your computer.
+The idea behind that is that if you work on different projects
+requiring different parameters, then you can have a <em>Checkers.sh</em> file
+per project, allowing you to keep track of what you did.</p>
+<h3 id="bash-script-setting-the-variables">Bash script: setting the variables</h3>
+<p>At the top of the Checkers bash script, you will find several <code>module load</code>
+commands. These commands are Massive-specific and are useful
+only to people having access to the Massive data processing engine
+<a href="https://massive.org.au">https://massive.org.au</a>.
+If you are using a desktop computer, you
+can simply delete these lines or comment them using a # in front of
+the line.</p>
+<p>Before running Checkers, you must set up a few variables that correspond to:</p>
+<ul>
+<li>Computing directory path</li>
+<li>Data directory path</li>
+<li>Tomo3D path</li>
+<li>Thickness of the reconstruction</li>
+<li>X/Y dimension of the tilt-series (only one value, we assume square images)</li>
+</ul>
+<p>We chose to have a <em>computing directory</em> AND a <em>data directory</em>
+because in our workflow the directory where the <em>data</em> is stored has
+either limited capacity, a slower connection, or both. By copying the
+<em>data</em> to the <em>computing directory</em>, we avoid writing the intermediate
+computed steps to the <em>data directory</em> and we run the computation on a
+disk with faster disk access.</p>
+<p>If your configuration or liking is to run the computation in the same
+folder as where your data is located, then just enter the same path for
+the <em>computing</em> and <em>data</em> directories.</p>
+<p>The <em>tomo3dpath</em> is simply the path of Tomo3D bin folder on your
+computer. We use Tomo3D for computing the 3D reconstructions. However,
+if you prefer using IMOD for reconstructing your tomograms, please do
+it.</p>
+<p>The <em>thickness</em> variable represents how thick the reconstruction will be
+in pixels. You should know more or less the value here.</p>
+<h3 id="bash-script-actual-computation">Bash script: actual computation</h3>
+<p>Checkers can process several tilt-series sequentially. This is performed
+using a <code>for</code> loop that goes through the different tilt-series, checking
+if the data actually exists, skipping non-existent data which is useful
+when there are gaps in the tilt-series list. Our dataset always contains
+a few tens of tilt-series, so by default we number the tilt-series using
+3 digits. However, if you have more than a thousand tilt-series, it is
+possible to use 4 digits, as indicated in the script.</p>
+<p>At the beginning of the script, the user is asked to define the
+coordinates of the region of interest for each tilt-series. There are at
+least a couple of reasons why you should do that. First, in terms of
+computing time, you do not want to perform the whole cryoCARE denoising
+on the entire volume, especially if the sample does not fill it (which
+is rarely the case). Using large volumes might cause <em>out-of-memory</em>
+issues in cryoCARE and you might have to pick a greater number of volume
+coordinates to more accurately train your model, which will
+significantly increase the computation time. The second reason is that
+in cryo-STET there are often large differences between the min and max
+pixel values, because thick samples (e.g. entire bacteria) are observed
+on a thin background (carbon support film). At the background level, the
+intense beam experiences almost no scattering, hence all electrons are
+collected on the STEM BF detector, generating a high-intensity pixel. At
+the sample level, the scattering is important (especially at high tilt
+angles), generating a low-intensity pixel. During the testing of
+Checkers, we noticed that denoising works better on smaller 3D
+reconstructions where the values of high-intensity and low-intensity
+pixels are contained. Checkers uses an aligned tilt-series to generate
+the denoised 3D reconstruction, then, you can relatively easily compute
+a 3D reconstruction for each tilt-series and identify the 6 coordinates
+(xStart, xStop, yStart, yStop, zStart, zStop) that define your area of
+interest. Checkers will automatically compute the values that must be
+given to the <code>newstack</code> command.</p>
+<p>The <code>TS</code> and <code>TF</code> variables represent the names of the aligned
+tilt-series and tilt-angles, respectively. In Checkers, there is no
+assumption on what the extension of your files should be, this is why
+you need to provide the full filenames (except for the loop number). The
+tilt-series must be already aligned, and it can have any file extension
+(<code>.ali</code>, <code>.st</code>, <code>.mrc</code>, <code>.thisishowiliketonamemyfiles</code>, etc.) as long as
+it is a file in the MRC format. The same goes for the tilt-angle file,
+it just needs to be a single-column text file containing as many rows as
+images contained in the tilt-series file, this convention is used by
+many reconstruction algorithms (e.g. IMOD, Tomo3D). The convention we
+use in the <code>Checkers.sh</code> file on GitHub is <code>.ali</code> and <code>.rawtlt</code> for the
+aligned tilt-series and the tilt file, respectively; however, you can
+change it to match your naming convention.</p>
+<p>Checkers automatically copies the <em>data</em> from the <em>data directory</em> to
+the <code>computing directory</code>. At the end of the script, it will also move
+the final results to your <em>data directory</em>. A sub-folder <code>TS_001</code> is
+also created and all intermediate steps will be written inside it, and
+eventually deleted.</p>
+<p>For better referencing the different computing steps performed in
+Checkers, we have numbered them from <strong>01</strong> to <strong>10</strong> in the
+<code>Checkers.sh</code> bash script. You might have to change some of the
+commands if you want to do things slightly differently than us, and we
+will let you know where to make those changes using the command
+numbers. Note that these numbers do not correspond to the step numbers
+described in the original publication of Checkers.</p>
+<h3 id="commands">Commands</h3>
+<ul>
+<li><a href="#command-01">Command 01</a></li>
+<li><a href="#commands-02a-and-02b">Commands 02a and 02b</a></li>
+<li><a href="#commands-03a-and-03b">Commands 03a and 03b</a></li>
+<li><a href="#commands-04a-and-04b">Commands 04a and 04b</a></li>
+<li><a href="#command-05">Command 05</a></li>
+<li><a href="#command-06">Command 06</a></li>
+<li><a href="#command-07">Command 07</a></li>
+<li><a href="#command-08">Command 08</a></li>
+<li><a href="#command-09">Command 09</a></li>
+<li><a href="#command-10">Command 10</a></li>
+</ul>
+<h4 id="command-01">Command 01</h4>
+<p>This command starts the <em>splitPixels.m</em> MATLAB script
+(no GUI displayed) which takes the input data and splits it into two
+halved datasets. To be able to run this script, the MATLAB file
+<em>splitPixels.m</em> must be in your <em>computing directory</em>, otherwise, MATLAB
+won't find it. As previously mentioned, <em>ReadMRC.m</em>, <em>WriteMRC.m</em>,
+<em>inpaintn.m,</em> etc. must also be in your <em>computing directory</em>. You can
+also put them in your MATLAB path, and to load your path you must use
+the <em>addpath(genpath(path))</em> command that is at the top of the
+<em>splitPixels.m</em> script. By default, the path loading is disabled, but a
+MATLAB experienced user might prefer having the path loaded instead of
+needing to have the MATLAB scripts in the computing directory. You have
+two options, choose the one you prefer. The command <strong>01</strong> also outputs
+a log file (<em>matlab_output_splitPixels.txt</em>) which will contain useful
+information if the command fails. The command <strong>01</strong> outputs two
+tilt-series named <em>TS_001a_DTC.mrc</em> and <em>TS_001b_DTC.mrc</em>, which will be
+used in the following part of the Checkers script.</p>
+<h4 id="commands-02a-and-02b">Commands 02a and 02b</h4>
+<p>The volumes corresponding to the two
+inpainted tilt-series are reconstructed with Tomo3D. The output is a
+volume with the XZ plane facing us. At this step, if you want to use
+IMOD instead, just change the commands accordingly. You will need to
+replace the commands <strong>02a</strong> and <strong>02b</strong> with something like "<em>tilt
+-input -output -TILTFILE -THICKNESS etc.</em>"</p>
+<h4 id="commands-03a-and-03b">Commands 03a and 03b</h4>
+<p>Since the output of the previous command
+is a rotated volume, we need to rotate it in the right orientation so we
+can explore the data more easily. <em>Trimvol</em> is an IMOD command, and the <em>-rx</em>
+option rotates the volume around the X axis, so we have a volume with
+the XY plane facing us.</p>
+<h4 id="commands-04a-and-04b">Commands 04a and 04b</h4>
+<p>The <em>newstack</em> command from IMOD is used
+to crop the volumes according to the ROI coordinates defined above in
+the script. The <em>-secs</em> option lets you choose what slices of the volume
+you want to keep. With the <em>-size</em> option, you set X and Y sizes of the
+output reconstruction. And with the <em>-offset</em> option, you set the centre
+of the output reconstruction (0,0 means that the input and output
+reconstructions will share the same centre). All of this is already
+taken care of by Checkers. If you do not want to crop your
+reconstruction, just comment the <em>newstack</em> commands <strong>04a</strong> and <strong>04b</strong>
+with a #, it will still work.</p>
+<h4 id="command-05">Command 05</h4>
+<p>Delete temporary files.</p>
+<h4 id="command-06">Command 06</h4>
+<p>This command is to load the cryocare conda environment.
+The first line (<em>source /my/path/to/...</em>) consists of loading miniconda.
+The second line (<em>module load cryocare)</em> is loading the cryoCARE
+environment. You will need to input the right path.</p>
+<h4 id="command-07">Command 07</h4>
+<p>This is the 1^st^ cryoCARE command which generates the
+data for further training of the model. Here we use the following
+parameters (as in train_data_config.json from cryoCARE_pip):</p>
+<ul>
+<li>Number of train volumes = 1200</li>
+<li>Number of validation volumes = 120</li>
+<li>Volume dimensions = 72,72,72</li>
+</ul>
+<p>These parameters were not particularly optimised. Feel free to change
+them if they do not suit you or if you think you can achieve better
+denoising.</p>
+<h4 id="command-08">Command 08</h4>
+<p>This is the 2^nd^ cryoCARE command which trains the
+neural network model. We use the following parameters (as in
+train_config.json from cryoCARE_pip):</p>
+<ul>
+<li>Train loss = mse</li>
+<li>Number of training epochs = 100</li>
+<li>Number of training steps per epoch = 200</li>
+<li>U-net depth = 3</li>
+<li>U-net first layer size = 16</li>
+<li>Learning rate = 4. 10^-4^</li>
+</ul>
+<p>Again, these parameters were not particularly optimised. Feel free to
+change them if they do not suit you or if you think you can achieve
+better denoising.</p>
+<h4 id="command-09">Command 09</h4>
+<p>This is the 3^rd^ and last cryoCARE command which
+applies the trained model to the data.</p>
+<h4 id="command-10">Command 10</h4>
+<p>The final data, including the denoised tomogram, the
+cryoCARE <code>config.json</code> file, the computed model weights and the Matlab log
+are moved to the <em>data directory</em>.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>
+<p>Lehtinen, J. <em>et al.</em> Noise2Noise: Learning Image Restoration
+without Clean Data. in <em>Proceedings of the 35th International Conference
+on Machine Learning</em> 2965--2974 (PMLR, 2018).</p>
+</li>
+<li>
+<p>Buchholz, T.-O., Jordan, M., Pigino, G. &amp; Jug, F. Cryo-CARE:
+Content-Aware Image Restoration for Cryo-Transmission Electron
+Microscopy Data. 5.</p>
+</li>
+<li>
+<p>Kremer, J. R., Mastronarde, D. N. &amp; McIntosh, J. R. Computer
+visualization of three-dimensional image data using IMOD. <em>J Struct
+Biol</em> <strong>116</strong>, 71--76 (1996).</p>
+</li>
+<li>
+<p>Mastronarde, D. N. &amp; Held, S. R. Automated tilt series alignment and
+tomographic reconstruction in IMOD. <em>J Struct Biol</em> <strong>197</strong>, 102--113
+(2017).</p>
+</li>
+<li>
+<p>Agulleiro, J. I. &amp; Fernandez, J. J. Fast tomographic reconstruction
+on multicore computers. <em>Bioinformatics</em> <strong>27</strong>, 582--583 (2011).</p>
+</li>
+<li>
+<p>Agulleiro, J.-I. &amp; Fernandez, J.-J. Tomo3D 2.0 -- Exploitation of
+Advanced Vector eXtensions (AVX) for 3D reconstruction. <em>Journal of
+Structural Biology</em> <strong>189</strong>, 147--152 (2015).</p>
+</li>
+<li>
+<p>Fernandez, J.-J., Li, S., Bharat, T. A. M. &amp; Agard, D. A.
+Cryo-tomography tilt-series alignment with consideration of the
+beam-induced sample motion. <em>Journal of Structural Biology</em> <strong>202</strong>,
+200--209 (2018).</p>
+</li>
+<li>
+<p>Garcia, D. Robust smoothing of gridded data in one and higher
+dimensions with missing values. <em>Comput Stat Data Anal</em> <strong>54</strong>,
+1167--1178 (2010).</p>
+</li>
+<li>
+<p>Wang, G., Garcia, D., Liu, Y., de Jeu, R. &amp; Johannes Dolman, A. A
+three-dimensional gap filling method for large geophysical datasets:
+Application to global satellite soil moisture observations.
+<em>Environmental Modelling &amp; Software</em> <strong>30</strong>, 139--142 (2012).</p>
+</li>
+<li>
+<p>Trépout, S. Tomographic Collection of Block-Based Sparse STEM
+Images: Practical Implementation and Impact on the Quality of the 3D
+Reconstructed Volume. <em>Materials</em> <strong>12</strong>, 2281 (2019).</p>
+</li>
+<li>
+<p>Cossa, A., Arluison, V. &amp; Trépout, S. Sparse cryo-STEM tomography
+for biological samples. <em>Microsc Microanal</em> <strong>27</strong>, 3028--3030 (2021).</p>
+</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
         <script src="../search/main.js"></script>
-      
-    
-  </body>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
 </html>
