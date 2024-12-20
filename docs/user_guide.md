@@ -52,35 +52,38 @@ development of Windows or Mac version of Checkers is planned.
 
 ### Figure 1
 
-![Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers](Figure1.png){width="3.2in"
-height="3.7784722222222222in"}
-**Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers.**
-**First row:** A large field of view and a two-stage zoomed area focusing on gold beads
-are included to better appreciate the image content after each computing
-step. The input is a conventional image extracted from an aligned
-cryo-STET tilt-series.
-**Second and third rows:** After splitting the
-pixels, two images are created, a first one composed of even coordinate
-pixels only and a second one only containing the odd coordinate pixels.
-In the large field of view, the odd and even images appear dark because
-of the presence of black pixels (i.e., the ones that were not copied).
-The moiré pattern is an optical illusion as can be observed in the zoom
-images, the intensity of the remaining pixels is the same (actually
-strictly the same) as that of the original ones.
-**Fourth and fifth rows:** The inpainting step reconstructs the missing pixels, generating
-two images that on the large field of view cannot be distinguished from
-the original image, but at the highest zoom, differences can be
-observed.
-**Extra information:** Note that at the splitting step, only
-half of the pixels are used as only pixels with coordinates (x-y) 1-1,
-2-2, 1-3, 2-4, 1-5, 2-6, and so on, are kept. The reason for keeping
-only half of the pixels is that this strategy produced higher-quality
-denoised reconstructions. This has not been investigated further, but it
-could be that adjacent pixels do not satisfy the noise independence
-requirements because they share a certain amount of noise due to the
-scanning of the electron beam (two adjacent pixels are collected
-sequentially). Pixels diagonally adjacent are not collected sequentially
-and they generate better denoised volumes.
+![Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers](Figure1.png)
+> **Figure 1. Evolution of the image content during the splitting and inpainting steps of Checkers.**
+>
+> **First row:** A large field of view and a two-stage zoomed area focusing on gold beads
+> are included to better appreciate the image content after each computing
+> step. The input is a conventional image extracted from an aligned
+> cryo-STET tilt-series.
+>
+> **Second and third rows:** After splitting the
+> pixels, two images are created, a first one composed of even coordinate
+> pixels only and a second one only containing the odd coordinate pixels.
+> In the large field of view, the odd and even images appear dark because
+> of the presence of black pixels (i.e., the ones that were not copied).
+> The moiré pattern is an optical illusion as can be observed in the zoom
+> images, the intensity of the remaining pixels is the same (actually
+> strictly the same) as that of the original ones.
+>
+> **Fourth and fifth rows:** The inpainting step reconstructs the missing pixels, generating
+> two images that on the large field of view cannot be distinguished from
+> the original image, but at the highest zoom, differences can be
+> observed.
+>
+> **Extra information:** Note that at the splitting step, only
+> half of the pixels are used as only pixels with coordinates (x-y) 1-1,
+> 2-2, 1-3, 2-4, 1-5, 2-6, and so on, are kept. The reason for keeping
+> only half of the pixels is that this strategy produced higher-quality
+> denoised reconstructions. This has not been investigated further, but it
+> could be that adjacent pixels do not satisfy the noise independence
+> requirements because they share a certain amount of noise due to the
+> scanning of the electron beam (two adjacent pixels are collected
+> sequentially). Pixels diagonally adjacent are not collected sequentially
+> and they generate better denoised volumes.
 
 ## Using Checkers
 
