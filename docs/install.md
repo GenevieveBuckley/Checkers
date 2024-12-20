@@ -22,8 +22,8 @@ main bash script (provided at [Scripts/Checkers.sh](Scripts/Checkers.sh)).
 Our detailed user guide describes how to run each step of the process.
 
 - User guide webpage [https://cryostem-tools.github.io/Checkers/user_guide/](https://cryostem-tools.github.io/Checkers/user_guide/)
-- User guide markdown files (this is used to generate the webpage) [docs/user_guide.md](docs/user_guide.md)
-- User guide PDF document (~300KB) [docs/Checkers_Manual_v0.2.pdf](docs/Checkers_Manual_v0.2.pdf)
+- User guide markdown files (this is used to generate the webpage) [https://github.com/CryoSTEM-tools/Checkers/blob/main/docs/user_guide.md](https://github.com/CryoSTEM-tools/Checkers/blob/main/docs/user_guide.md)
+- User guide PDF document (~300KB) [Checkers_Manual_v0.2.pdf](https://github.com/CryoSTEM-tools/Checkers/blob/main/docs/Checkers_Manual_v0.2.pdf)
 
 We also accept contributions for improving the documentation.
 If you think you can help make something better, please let us know.
